@@ -1,0 +1,218 @@
+library(shiny)
+library(tidyverse)
+library(sf)
+library(vioplot)
+
+setwd("~/Desktop/ENSAI/R/Rshiny")
+
+D1<-read.table("~/Desktop/ENSAI/Projet stat/R/D1.csv",sep=",",header=TRUE)
+France <- readRDS("~/Desktop/ENSAI/Projet stat/R/gadm36_FRA_2_sf.rds")
+France <- left_join(France, D1, by = c("NAME_2" = "Département"))  %>%st_set_crs(st_crs(4326))
+
+generate_color_gradient <- function(color) {
+  # Convertir la couleur en format hexadécimal
+  hex_color <- grDevices::col2rgb(color, alpha = FALSE)
+  hex_color <- sprintf("#%02X%02X%02X", hex_color[1], hex_color[2], hex_color[3])
+  colors <- c(color)
+  for (i in 1:3) {
+    gradient_color <- adjustcolor(hex_color, alpha.f = 1 - (i * 0.25))
+    colors <- c(colors, gradient_color)
+  }
+  return(rev(colors))
+}
+
+generate_random_color <- function() {
+  red <- sample(10:230, 1)
+  green <- sample(10:230, 1)
+  blue <- sample(10:230, 1)
+  hex_color <- sprintf("#%02X%02X%02X", red, green, blue)
+  
+  return(hex_color)
+}
+
+FQuantile1_2<-function(var,quant){
+  Quantile<-as_tibble(quantile(D1[[var]], probs=seq(0,1,1/quant),na.rm=TRUE))
+  num<-which(colnames(D1)==var)
+  A<-subset(D1, D1[,num]<=as.numeric(Quantile[2,1]) & D1[,num]>=as.numeric(Quantile[1,1]))
+  D1$Tranche<<- ifelse(D1$Département %in% A$Département,"1","0")
+  r<-c(weighted.mean(A$Voix_Le_Pen,A$Exprimés),weighted.mean(A$Voix_Macron,A$Exprimés),weighted.mean(A$Voix_Mélenchon,A$Exprimés))
+  for (i in 2:quant) {
+    A<-subset(D1, D1[,num]<=as.numeric(Quantile[i+1,1]) & D1[,num]>as.numeric(Quantile[i,1]))
+    D1$Tranche<<- ifelse(D1$Département %in% A$Département,i,D1$Tranche)
+    r<-rbind(r,c(weighted.mean(A$Voix_Le_Pen,A$Exprimés),weighted.mean(A$Voix_Macron,A$Exprimés),weighted.mean(A$Voix_Mélenchon,A$Exprimés)))
+  }
+  Quantile<-Quantile[-1,]
+  Quantile<-cbind(Quantile,r,seq(1:quant))
+  ifelse(quant==100,colnames(Quantile)<-c("Centiles","Moyenne Le Pen","Moyenne Macron","Moyenne Mélenchon",paste("Tranches_Centiles_",var,sep="")),
+         colnames(Quantile)<-c("Déciles","Moyenne Le Pen","Moyenne Macron","Moyenne Mélenchon",paste("Tranches_Déciles_",var,sep="")))
+  return(Quantile)
+}
+
+
+ui <- fluidPage(
+  sidebarLayout(position = "left",
+                sidebarPanel(selectInput(inputId ='graph' ,
+                                         label='Type de graphique :',choices=c("Table","Décile","Nuage de Points","Violinplot","Carte"),
+                                         selected='Table'),
+                             conditionalPanel(condition = "input.graph != 'Table'",selectInput(inputId ='var' ,
+                                         label='Variable',choices=colnames(D1),
+                                         selected='Ouvriers')),
+                             conditionalPanel(condition = "input.graph == 'Carte'",actionButton("generer", "Changer de couleur")),
+                             conditionalPanel(condition = "input.graph == 'Nuage de Points'",
+                                              uiOutput("var2Range"),
+                                              selectInput(inputId ='var2' ,label='Variable Y',choices=colnames(D1),selected='Voix_Le_Pen'),
+                                              uiOutput("var3Range"),
+                                              selectInput(inputId ='var3' ,label='Variable Z',choices=c(colnames(D1),"Aucune"),selected='Aucune')),
+                             tags$div(
+                               style = "display: flex; justify-content: center;",
+                               tags$img(src = "ensai_logo.png", width = "250px", height = "150px")
+                             )
+                             ),
+                mainPanel(uiOutput("graphOutput"),conditionalPanel(condition = "input.graph == 'Décile' || input.graph == 'Nuage de Points'",
+                          verbatimTextOutput("info"),tableOutput("plot_clickedpoints"))
+                          )
+  )
+)
+
+# Define server logic required to draw a histogram ----
+server <- function(input, output) {
+  
+  generate_gradient_colors <- function(color) {
+    generate_color_gradient(color)
+  }
+  generate_random_fill_color <- function() {
+    generate_random_color()
+  }
+  
+  output$data_table <- renderTable({D1})
+  
+  output$var2Range <- renderUI({
+    sliderInput(
+      inputId = 'obs',
+      label = "Valeurs de la variable",
+      min = min(D1[[input$var]], na.rm = TRUE),
+      max = max(D1[[input$var]], na.rm = TRUE),
+      value = c(min(D1[[input$var]], na.rm = TRUE), max(D1[[input$var]], na.rm = TRUE))
+    )
+  })
+  
+  output$var3Range <- renderUI({
+    sliderInput(
+      inputId = 'obs2',
+      label = "Valeurs de la variable Y",
+      min = min(D1[[input$var2]], na.rm = TRUE),
+      max = max(D1[[input$var2]], na.rm = TRUE),
+      value = c(min(D1[[input$var2]], na.rm = TRUE), max(D1[[input$var2]], na.rm = TRUE))
+    )
+  })
+
+  output$decile <- renderPlot({
+  
+    Quantile<-FQuantile1_2(input$var,10)
+    
+    ggplot(Quantile, aes(x = Quantile[,5])) +
+      geom_point(aes(y = Quantile[,2], color = "Blue Points")) +
+      geom_point(aes(y = Quantile[,3], color = "Orange Points")) +
+      geom_point(aes(y = Quantile[,4], color = "Red Points")) +
+      scale_color_manual(values = c("blue","orange","red"),
+                         labels = c("Le Pen","Macron","Mélenchon") )+
+      labs(caption="Champ : France métropolitaine \nSource : Insee, recensement de la population 2018 / Ministère de l'intérieur 2022",
+           color = "") + theme_bw() +
+      theme(axis.text=element_text(face="bold"),axis.title=element_text(face="bold"),legend.position = "top",
+            legend.box = "horizontal",plot.caption = element_text(hjust = 0, face = "bold.italic"),
+            legend.title = element_text(face = "bold"),legend.text = element_text(face = "bold"))+
+      scale_x_continuous(paste("Décile de la part de",input$var),breaks=seq(0,20,by=1))+
+      scale_y_continuous("Moyenne pondérée par les exprimés (%)")+
+      geom_line(aes(x = Quantile[,5],y = Quantile[,2]),colour ="blue")+
+      geom_line(aes(x = Quantile[,5],y = Quantile[,3]),colour ="orange")+
+      geom_line(aes(x = Quantile[,5],y = Quantile[,4]),colour ="red")
+  })
+  
+  output$info <- renderText({
+    if (input$graph == "Décile" || input$graph == "Nuage de Points") {
+      paste0("x=", round(as.numeric(input$plot_click$x), 2), "\ny=", round(as.numeric(input$plot_click$y), 2))
+    }
+  })
+  
+  output$plot_clickedpoints <- renderTable({
+    if (input$graph == "Nuage de Points") {
+      res <- tryCatch({
+        nearPoints(D1, input$plot_click)
+      }, error = function(e) {NULL})
+      
+      if (is.null(res) || nrow(res) == 0) {
+        return(NULL)
+      }
+      res
+    }
+  })
+  
+  output$vioplot <- renderPlot({
+    ggplot(D1, aes(x = Région, y = .data[[input$var]])) +
+      geom_violin(aes(fill = Région),trim = FALSE) +geom_boxplot(width=0.05)+geom_jitter()+
+      labs(y =  input$var)+ theme_bw() + guides(fill = "none") +theme(axis.text = element_text(face = "bold", angle = 45, hjust = 1),axis.title=element_text(face="bold"))
+  })
+  
+  output$carte <- renderPlot({
+    ggplot(France) +
+      geom_sf(aes(fill = cut(!!sym(input$var), breaks = quantile(France[[input$var]], probs=seq(0,1,1/4)),include.lowest=TRUE)),
+              show.legend = TRUE, color = "white", size = 0.2) +
+      coord_sf(datum = NA, expand = FALSE) +
+      scale_fill_manual(values = generate_gradient_colors(generate_random_color ()))  +
+      theme(panel.background = element_blank(),legend.position = "top",legend.box = "horizontal",
+            plot.caption = element_text(face = "bold.italic"),
+            legend.title = element_text(face = "bold"),
+            legend.text = element_text(face = "bold"))+ labs(fill = input$var)
+  })
+  
+  output$nuage <-renderPlot({ 
+    if (input$var3 == 'Aucune' ) {
+    ggplot(D1,aes(x =!!sym(input$var) , y = !!sym(input$var2)))+
+      theme_bw()+theme(axis.title=element_text(face="bold"),plot.title = element_text(hjust = 0.5, face="bold"),legend.position = "top",legend.box = "horizontal",
+                       legend.title =element_text(hjust = 0.5, face="bold"),plot.caption = element_text(hjust = 0, face = "bold.italic"))+
+      labs(caption="Champ : France métropolitaine \nSource : Insee, recensement de la population 2018 / Ministère de l'intérieur 2022")+
+      geom_point()+scale_x_continuous(limits=input$obs)+scale_y_continuous(limits=input$obs2)
+    }  else {
+    ggplot(D1,aes(x =!!sym(input$var) , y = !!sym(input$var2), color= !!sym(input$var3)))+
+      theme_bw()+theme(axis.title=element_text(face="bold"),plot.title = element_text(hjust = 0.5, face="bold"),legend.position = "top",legend.box = "horizontal",
+                       legend.title =element_text(hjust = 0.5, face="bold"),plot.caption = element_text(hjust = 0, face = "bold.italic"))+
+      scale_color_viridis_c(option = "D") +
+      labs(caption="Champ : France métropolitaine \nSource : Insee, recensement de la population 2018 / Ministère de l'intérieur 2022")+
+      geom_point()+scale_x_continuous(limits=input$obs)+scale_y_continuous(limits=input$obs2)
+    } 
+  })
+
+    
+  observeEvent(input$generer, {
+    output$carte <- renderPlot({
+      ggplot(France) +
+        geom_sf(aes(fill = cut(!!sym(input$var), breaks = quantile(France[[input$var]], probs=seq(0,1,1/4)),include.lowest=TRUE)),
+                show.legend = TRUE, color = "white", size = 0.2) +
+        coord_sf(datum = NA, expand = FALSE) +
+        scale_fill_manual(values = generate_gradient_colors(generate_random_color ()))  +
+        theme(panel.background = element_blank(),legend.position = "top",legend.box = "horizontal",
+              plot.caption = element_text(face = "bold.italic"),
+              legend.title = element_text(face = "bold"),
+              legend.text = element_text(face = "bold"))+ labs(fill = input$var)
+    })
+  })
+  
+
+  
+  output$graphOutput <- renderUI({
+    if (input$graph == "Table") {
+      tableOutput("data_table")
+    } else if (input$graph == "Décile") {
+      plotOutput(outputId = "decile",click = "plot_click")
+    } else if (input$graph == "Violinplot") {
+      plotOutput(outputId = "vioplot")
+    } else if (input$graph == "Carte") {
+      plotOutput(outputId = "carte")
+    }else if (input$graph == "Nuage de Points") {
+      plotOutput(outputId = "nuage",click = "plot_click")
+    }
+  })
+}
+
+shinyApp(ui = ui, server = server)
+#runApp(display.mode = "showcase")
