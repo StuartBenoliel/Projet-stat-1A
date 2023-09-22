@@ -1,0 +1,309 @@
+﻿Observatoire des territoires - ANCT; ; 
+Référentiel géographique : Zones d'emploi (2020); ; 
+Code;Libellé;Typologie des zones d'emploi selon l'orientation économique principale
+0051;Alençon;ZEDIV
+0052;Arles;ZETOU
+0053;Avignon;ZEAGG
+0054;Beauvais;ZEDRES
+0055;Bollène-Pierrelatte;ZEIND
+0056;Cosne-Cours-sur-Loire;ZEAGR
+0057;Dreux;ZEDRES
+0058;La Vallée de la Bresle-Vimeu;ZEIND
+0059;Mâcon;ZEDIV
+0060;Nevers;ZEDIV
+0061;Nogent-le-Rotrou;ZEIND
+0062;Redon;ZEDRES
+0063;Ussel;ZEAGR
+0064;Valréas;ZEAGR
+0101;Côte sous le vent;ZEDIV
+0102;Est Grande Terre;ZEAGR
+0103;Marie-Galante;ZEAGR
+0104;Région Pointoise;ZEDIV
+0105;Sud Basse-Terre;ZEDIV
+0201;Le Centre-Atlantique;ZEDIV
+0202;Le Centre agglomération;ZEAGG
+0203;Le Nord-Atlantique;ZEAGR
+0204;Le Nord-Caraibe;ZEAGR
+0205;Le Sud;ZETOU
+0206;Le Sud-Caraibe;ZETOU
+0301;Est-littoral;ZEDIV
+0302;Ouest-Guyanais;ZEDIV
+0303;Savanes;ZEDRES
+0401;L'Est;ZEDIV
+0402;L'Ouest;ZEDIV
+0403;Le Nord;ZEAGG
+0404;Le Sud;ZEDIV
+0601;Mayotte;ZEAGG
+1101;Cergy-Vexin;ZEDRES
+1102;Coulommiers;ZEDRES
+1103;Etampes;ZEDRES
+1104;Evry;ZEMET
+1105;Fontainebleau-Nemours;ZEDRES
+1106;Marne-la-Vallée;ZETOU
+1107;Meaux;ZEDRES
+1108;Melun;ZEDRES
+1109;Paris;ZEMET
+1110;Provins;ZEAGR
+1111;Rambouillet;ZEDRES
+1112;Roissy;ZEAGG
+1113;Saclay;ZEMET
+1114;Seine-Yvelinoise;ZEMET
+1115;Versailles-Saint-Quentin;ZEMET
+2401;Blois;ZEAGG
+2402;Bourges;ZEDIV
+2403;Chartres;ZEDRES
+2404;Châteaudun;ZEDIV
+2405;Châteauroux;ZEDIV
+2406;Chinon;ZEIND
+2407;Gien;ZEIND
+2408;Loches;ZEAGR
+2409;Montargis;ZEDRES
+2410;Orléans;ZEAGG
+2411;Pithiviers;ZEDRES
+2412;Romorantin-Lanthenay;ZEDRES
+2413;Tours;ZEAGG
+2414;Vendôme;ZEIND
+2415;Vierzon;ZEDIV
+2701;Autun;ZEDIV
+2702;Auxerre;ZEDIV
+2703;Avallon;ZEAGR
+2704;Beaune;ZEAGR
+2705;Belfort;ZEAGG
+2706;Besançon;ZEAGG
+2707;Chalon-sur-Saône;ZEDIV
+2708;Charolais;ZEDIV
+2709;Châtillon-Montbard;ZEDIV
+2710;Creusot-Montceau;ZEIND
+2711;Dijon;ZEAGG
+2712;Dole;ZEDRES
+2713;Lons-le-Saunier;ZEDIV
+2714;Montbéliard;ZEIND
+2715;Pontarlier;ZEDRES
+2716;Saint-Claude;ZEDRES
+2717;Sens;ZEDRES
+2718;Vesoul;ZEDIV
+2801;Argentan;ZEAGR
+2802;Avranches;ZEAGR
+2803;Bernay;ZEDRES
+2804;Caen;ZEAGG
+2805;Cherbourg en Cotentin;ZEAGG
+2806;Coutances;ZEAGR
+2807;Dieppe-Caux maritime;ZEIND
+2808;Evreux;ZEDIV
+2809;Flers;ZEIND
+2810;Granville;ZETOU
+2811;Honfleur Pont-Audemer;ZETOU
+2812;L'Aigle;ZEIND
+2813;Le Havre;ZEAGG
+2814;Lisieux;ZEDIV
+2815;Rouen;ZEAGG
+2816;Saint-Lô;ZEDIV
+2817;Vernon-Gisors;ZEDRES
+2818;Vire Normandie;ZEAGR
+2819;Yvetot-Vallée du Commerce;ZEDRES
+3201;Abbeville;ZETOU
+3202;Amiens;ZEAGG
+3203;Arras;ZEAGG
+3204;Berck;ZETOU
+3205;Béthune;ZEDRES
+3206;Boulogne-sur-Mer;ZEDIV
+3207;Calais;ZEDIV
+3208;Cambrai;ZEDIV
+3209;Château-Thierry;ZEDRES
+3210;Compiègne;ZEDRES
+3211;Creil;ZEDRES
+3212;Douai;ZEDIV
+3213;Dunkerque;ZEAGG
+3214;Laon;ZEDIV
+3215;Lens;ZEAGG
+3216;Lille;ZEMET
+3217;Maubeuge;ZEDIV
+3218;Roubaix-Tourcoing;ZEAGG
+3219;Saint-Omer;ZEDIV
+3220;Saint-Quentin;ZEDIV
+3221;Soissons;ZEDRES
+3222;Valenciennes;ZEAGG
+4401;Bar-le-Duc;ZEDIV
+4402;Châlons-en-Champagne;ZEDIV
+4403;Charleville-Mézières;ZEDIV
+4404;Chaumont;ZEDIV
+4405;Colmar;ZEAGG
+4406;Épernay;ZEAGR
+4407;Épinal;ZEDIV
+4408;Forbach;ZEDRES
+4409;Haguenau;ZEDRES
+4410;Metz;ZEAGG
+4411;Mulhouse;ZEAGG
+4412;Nancy;ZEAGG
+4413;Reims;ZEAGG
+4414;Remiremont;ZEIND
+4415;Romilly-sur-Seine;ZEIND
+4416;Saint-Avold;ZEDRES
+4417;Saint-Dié-des-Vosges;ZEDRES
+4418;Saint-Louis;ZEDRES
+4419;Sarrebourg;ZEDIV
+4420;Sarreguemines;ZEDRES
+4421;Sedan;ZEDRES
+4422;Sélestat;ZEDRES
+4423;Strasbourg;ZEMET
+4424;Thionville;ZEDRES
+4425;Troyes;ZEDIV
+4426;Verdun;ZEDIV
+4427;Vitry-le-François Saint-Dizier;ZEDIV
+5201;Ancenis;ZEIND
+5202;Angers;ZEAGG
+5203;Challans;ZETOU
+5204;Château-Gontier;ZEIND
+5205;Châteaubriant;ZEAGR
+5206;Cholet;ZEIND
+5207;Fontenay-le-Comte;ZEAGR
+5208;La Ferté-Bernard;ZEIND
+5209;La Flèche;ZEIND
+5210;La Roche-sur-Yon;ZEAGG
+5211;Laval;ZEAGG
+5212;Le Mans;ZEAGG
+5213;Les Herbiers-Montaigu;ZEIND
+5214;Les Sables-d'Olonne;ZETOU
+5215;Mayenne;ZEIND
+5216;Nantes;ZEMET
+5217;Pornic;ZETOU
+5218;Sablé-sur-Sarthe;ZEIND
+5219;Saint-Nazaire;ZEAGG
+5220;Saumur;ZEAGR
+5221;Segré-en-Anjou Bleu;ZEIND
+5301;Auray;ZETOU
+5302;Brest;ZEAGG
+5303;Carhaix-Plouguer;ZEAGR
+5304;Dinan;ZETOU
+5305;Fougères;ZEIND
+5306;Guingamp;ZEDIV
+5307;Lamballe-Armor;ZEIND
+5308;Lannion;ZETOU
+5309;Lorient;ZEAGG
+5310;Morlaix;ZEDIV
+5311;Ploërmel;ZEIND
+5312;Pontivy-Loudéac;ZEIND
+5313;Quimper;ZEAGG
+5314;Quimperlé;ZEDRES
+5315;Rennes;ZEMET
+5316;Saint-Brieuc;ZEAGG
+5317;Saint-Malo;ZETOU
+5318;Vannes;ZETOU
+5319;Vitré;ZEIND
+7501;Agen;ZEDIV
+7502;Angoulême;ZEDIV
+7503;Bayonne;ZEAGG
+7504;Bergerac;ZEAGR
+7505;Bordeaux;ZEMET
+7506;Bressuire;ZEIND
+7507;Brive-la-Gaillarde;ZEDIV
+7508;Châtellerault;ZEIND
+7509;Cognac;ZEAGR
+7510;Dax;ZETOU
+7511;Guéret;ZEAGR
+7512;La Rochelle;ZEAGG
+7513;La Teste-de-Buch;ZETOU
+7514;Langon;ZEAGR
+7515;Lesparre-Médoc;ZEAGR
+7516;Libourne;ZEAGR
+7517;Limoges;ZEAGG
+7518;Marmande;ZEAGR
+7519;Mont-de-Marsan;ZEDIV
+7520;Niort;ZEAGG
+7521;Oloron-Sainte-Marie;ZEAGR
+7522;Pau;ZEAGG
+7523;Périgueux;ZEDIV
+7524;Poitiers;ZEAGG
+7525;Rochefort;ZEDIV
+7526;Royan;ZETOU
+7527;Saint-Junien;ZEAGR
+7528;Saintes;ZEDIV
+7529;Sarlat-La-Canéda;ZETOU
+7530;Thouars;ZEIND
+7531;Tulle;ZEDIV
+7532;Villeneuve-sur-Lot;ZEAGR
+7601;Agde-Pézenas;ZETOU
+7602;Albi;ZEDIV
+7603;Alès-Le Vigan;ZEDRES
+7604;Auch;ZEAGR
+7605;Bagnols-sur-Cèze;ZEAGG
+7606;Béziers;ZETOU
+7607;Cahors;ZEDIV
+7608;Carcassonne-Limoux;ZEDIV
+7609;Castelsarrasin-Moissac;ZEAGR
+7610;Castres-Mazamet;ZEDIV
+7611;Figeac-Villefranche;ZEIND
+7612;Foix-Pamiers;ZEDIV
+7613;Mende;ZEAGR
+7614;Millau;ZEAGR
+7615;Montauban;ZEDIV
+7616;Montpellier;ZEMET
+7617;Narbonne;ZETOU
+7618;Nîmes;ZEAGG
+7619;Nord-du-Lot;ZEIND
+7620;Perpignan;ZETOU
+7621;Rodez;ZEDIV
+7622;Saint-Gaudens;ZEDRES
+7623;Sète;ZETOU
+7624;Tarbes-Lourdes;ZETOU
+7625;Toulouse;ZEMET
+8401;Annecy;ZEAGG
+8402;Aubenas;ZETOU
+8403;Aurillac;ZEDIV
+8404;Belley;ZEDRES
+8405;Bourg en Bresse;ZEDRES
+8406;Bourgoin-Jallieu;ZEDRES
+8407;Chambéry;ZEAGG
+8408;Clermont-Ferrand;ZEAGG
+8409;Grenoble;ZEMET
+8410;Issoire;ZEIND
+8411;La Maurienne;ZETOU
+8412;La Plaine du Forez;ZEDRES
+8413;La Tarentaise;ZETOU
+8414;La Vallée de l'Arve;ZEIND
+8415;Le Chablais;ZETOU
+8416;Le Genevois Français;ZEDRES
+8417;Le Livradois;ZEIND
+8418;Le Mont Blanc;ZETOU
+8419;Le Puy en Velay;ZEDIV
+8420;Les Sources de la Loire;ZEIND
+8421;Lyon;ZEMET
+8422;Montélimar;ZEDIV
+8423;Montluçon;ZEDIV
+8424;Moulins;ZEDIV
+8425;Oyonnax;ZEIND
+8426;Roanne;ZEDIV
+8427;Romans sur Isère;ZEDRES
+8428;Saint Etienne;ZEAGG
+8429;Saint Flour;ZEAGR
+8430;Tarare;ZEDRES
+8431;Valence;ZEAGG
+8432;Vichy;ZEDIV
+8433;Vienne-Annonay;ZEDRES
+8434;Villefranche-sur-Saône;ZEDRES
+8435;Voiron;ZEDRES
+9301;Aix-en-Provence;ZEMET
+9302;Briançon;ZETOU
+9303;Brignoles;ZETOU
+9304;Cannes;ZEMET
+9305;Carpentras;ZEAGR
+9306;Cavaillon;ZETOU
+9307;Digne-les-Bains;ZETOU
+9308;Draguignan;ZEDIV
+9309;Fréjus;ZETOU
+9310;Gap;ZETOU
+9311;Manosque;ZEAGG
+9312;Marseille;ZEMET
+9313;Martigues-Salon;ZEAGG
+9314;Menton;ZETOU
+9315;Nice;ZEAGG
+9316;Orange;ZEAGR
+9317;Sainte-Maxime;ZETOU
+9318;Toulon;ZEAGG
+9401;Ajaccio;ZETOU
+9402;Bastia;ZETOU
+9403;Calvi;ZETOU
+9404;Corte;ZETOU
+9405;Ghisonaccia;ZEAGR
+9406;Porto-Vecchio;ZETOU
+9407;Propriano;ZETOU
